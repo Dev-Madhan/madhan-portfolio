@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* Define custom screen sizes as CSS variables */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Screen sizes */
+    --screen-sm: 375px;
+    --screen-md: 768px;
+    --screen-lg: 1200px;
+
+    /* Define red-orange-500 using color-mix */
+    --gray-green-500: color-mix(in srgb, #474747 50%, #7C8652 50%);
+
+    /* Define light color for border */
+    --border-light: #e5e7eb; /* Soft gray for light border */
+
+    /* Font family */
+    --font-archivo: "Archivo", sans-serif;
+  }
+}
+
+/* Extend container styles */
+@layer utilities {
+  .bg-red-orange-500 {
+    background-color: var(--gray-green-500);
+  }
+
+  .border-red-orange-500 {
+    border-color: var(--gray-green-500);
+  }
+
+  .border-light {
+    border-color: var(--border-light);
+  }
+
+  .font-sans {
+    font-family: var(--font-archivo), sans-serif;
+  }
+
+  .container {
+    @apply mx-auto;
+    max-width: 100%;
+  }
+
+
+
+  /* Padding based on screen sizes */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: var(--screen-md)) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: var(--screen-lg)) {
+    .container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+}
+
+/* Ensure font family is applied globally */
+@layer base {
+  html {
+    font-family: var(--font-archivo), sans-serif;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-archivo), sans-serif; /* Apply the font globally to the body */
+}
+
+button {
+  border: 2px solid var(--gray-green-500);
+  padding: 0.5rem 1rem;
 }
