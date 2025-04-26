@@ -36,7 +36,7 @@ const testimonials = [
 ];
 
 const Testimonials: FC = () => {
-  const testimonialIndex = 0;
+    const testimonialIndex = 0;
     return (
         <section className='section'>
             <h2 className='text-4xl md:text-7xl lg:text-8xl flex flex-col overflow-hidden'>
@@ -46,7 +46,14 @@ const Testimonials: FC = () => {
             </h2>
             <div className='container'>
                 <div className='mt-20'>
-                    {testimonials.map(({name, company, role, quote, image, imagePositionY}, index) => index === testimonialIndex && (
+                    {testimonials.map(({
+                                           name,
+                                           company,
+                                           role,
+                                           quote,
+                                           image,
+                                           imagePositionY
+                                       }, index) => index === testimonialIndex && (
                         <div key={name} className='grid md:grid-cols-5 md:gap-8 lg:gap-16 md:items-center'>
                             <div className='aspect-square md:col-span-2 md:aspect-[9/16]'>
                                 <Image src={image} alt={name} className='size-full object-cover' style={{
@@ -60,20 +67,23 @@ const Testimonials: FC = () => {
                                     <span>{quote}</span>
                                     <span>&rdquo;</span>
                                 </div>
-                                <cite className='mt-4 md:mt-8 not-italic block md:text-lg lg:text-xl'>{name}, {role} of {company}</cite>
+                                <cite
+                                    className='mt-4 md:mt-8 not-italic block md:text-lg lg:text-xl'>{name}, {role} of {company}</cite>
                             </blockquote>
                         </div>
                     ))}
                 </div>
                 <div className='flex gap-4 mt-6 lg:mt-10'>
-                    <button className='border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium'>
+                    <button
+                        className='border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5"
                              stroke="currentColor" className="size-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
                         </svg>
                     </button>
-                    <button className='border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium'>
-                        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5"
+                    <button
+                        className='border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5"
                              stroke="currentColor" className="size-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
                         </svg>

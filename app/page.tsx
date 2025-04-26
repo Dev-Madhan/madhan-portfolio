@@ -3,6 +3,8 @@ import Hero from "@/src/sections/Hero";
 import Intro from "@/src/sections/Intro";
 import Projects from "@/src/sections/Projects";
 import Testimonials from "@/src/sections/Testimonials";
+import FAQs from "@/src/sections/FAQs";
+import Footer from "@/src/sections/Footer";
 
 export default function Home() {
     return (
@@ -12,6 +14,8 @@ export default function Home() {
             <Intro/>
             <Projects/>
             <Testimonials/>
+            <FAQs/>
+            <Footer/>
         </>
     );
 }

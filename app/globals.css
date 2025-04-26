@@ -10,6 +10,10 @@
 
     /* Define red-orange-500 using color-mix */
     --gray-green-500: color-mix(in srgb, #474747 50%, #7C8652 50%);
+    --gray-green-900: color-mix(in srgb, #0d0d0d 90%, #7C8652 10%);
+
+
+
 
     /* Define light color for border */
     --border-light: #e5e7eb; /* Soft gray for light border */
@@ -23,6 +27,10 @@
 @layer utilities {
   .bg-red-orange-500 {
     background-color: var(--gray-green-500);
+  }
+
+  .bg-gray-green-900{
+    background-color:  var(--gray-green-900);
   }
 
   .border-red-orange-500 {
