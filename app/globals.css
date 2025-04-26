@@ -29,6 +29,10 @@
     border-color: var(--gray-green-500);
   }
 
+  .text-red-orange-500 {
+    color: var(--gray-green-500);
+  }
+
   .border-light {
     border-color: var(--border-light);
   }
@@ -42,7 +46,9 @@
     max-width: 100%;
   }
 
-
+  .section{
+    @apply py-24 md:py-32 lg:py-40;
+  }
 
   /* Padding based on screen sizes */
   .container {
