@@ -43,7 +43,7 @@ const projects = [
 
 const Projects: FC = () => {
   return (
-      <section className="section">
+      <section className="section" id='projects'>
         <div className="container">
           <h2 className="text-4xl font-medium md:text-7xl lg:text-8xl">Signature Pieces</h2>
           <div className="mt-10 md:mt-16 lg:mt-20">

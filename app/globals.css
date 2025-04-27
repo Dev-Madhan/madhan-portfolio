@@ -10,6 +10,7 @@
 
     /* Define red-orange-500 using color-mix */
     --gray-green-500: color-mix(in srgb, #474747 50%, #7C8652 50%);
+    --gray-green-800: color-mix(in srgb, #0d0d0d 80%, #7C8652 20%);
     --gray-green-900: color-mix(in srgb, #0d0d0d 90%, #7C8652 10%);
 
 
@@ -27,6 +28,10 @@
 @layer utilities {
   .bg-red-orange-500 {
     background-color: var(--gray-green-500);
+  }
+
+  .bg-gray-green-800{
+    background-color:  var(--gray-green-800);
   }
 
   .bg-gray-green-900{

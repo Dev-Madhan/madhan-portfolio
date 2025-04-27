@@ -21,7 +21,7 @@ const navItems = [
 ]
 
 const Footer: FC = () => {
-    return (<footer className='bg-gray-green-900 text-white'>
+    return (<footer className='bg-gray-green-900 text-white' id='contact'>
         <div className='container'>
             <div className='section'>
                 <div className='flex items-center gap-3'>
