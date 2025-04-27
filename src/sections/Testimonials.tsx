@@ -2,6 +2,7 @@ import {FC} from "react";
 import image1 from "@/src/assets/images/sahil.jpg";
 import image2 from "@/src/assets/images/chiddesh.jpg";
 import image3 from "@/src/assets/images/prakash.jpg";
+import image4 from "@/src/assets/images/saji.jpg";
 import Image from "next/image";
 
 /* eslint-disable-nextLine @typescript-eslint/no-unused-vars */
@@ -33,6 +34,15 @@ const testimonials = [
         image: image3,
         imagePositionY: 0.75,
     },
+    {
+        name: "Sajith Ahamed",
+        company: "South Indian Film Industry",
+        role: "Rising Music director",
+        quote:
+            "Madhan's expertise in technical development and design resulted in a stunning, high-performing website.",
+        image: image4,
+        imagePositionY: 0.75,
+    },
 ];
 
 const Testimonials: FC = () => {
@@ -42,7 +52,7 @@ const Testimonials: FC = () => {
             <h2 className='text-4xl md:text-7xl lg:text-8xl flex flex-col overflow-hidden'>
                 <span className='whitespace-nowrap'>Fresh props from my former clients</span>
                 <span
-                    className='whitespace-nowrap self-end text-red-orange-500'>Fresh props from my former clients</span>
+                    className='whitespace-nowrap self-end text-red-orange-500 font-medium'>Fresh props from my former clients</span>
             </h2>
             <div className='container'>
                 <div className='mt-20'>
