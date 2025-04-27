@@ -30,7 +30,7 @@ const FAQs: FC = () => {
         <div className='container'>
           <h2 className='text-4xl md:text-7xl lg:text-8xl'>FAQs</h2>
           <div className='mt-10 md:mt-16 lg:mt-20'>
-            {faqs.map(({question , answer }) => (
+            {faqs.map(({ question }) => (
                 <div key={question} className='border-t border-stone-400 border-dotted py-6 md:py-8 lg:py-10 last:border-b'>
                   <div className='flex items-center justify-between gap-4'>
                     <div className='text-2xl md:text-3xl lg:text-4xl'>{question}</div>
