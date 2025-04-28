@@ -114,3 +114,7 @@ button {
     transform: translateY(100%); /* Initial state: off-screen */
     opacity: 0; /* Optional: Start with zero opacity for fade-in effect */
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
