@@ -1,6 +1,6 @@
 "use client";
 
-import {FC, useEffect, useRef} from "react";
+import {FC, MouseEvent, useEffect, useRef} from "react";
 import heroImage from "../assets/images/hero-image.jpg";
 import Image from "next/image";
 import Button from "@/src/components/Button";
@@ -22,6 +22,17 @@ const Hero: FC = () => {
     useEffect(() => {
         entranceAnimation();
     }, [entranceAnimation]);
+
+    const handleClickNavItem = (e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+        e.preventDefault();
+
+
+        const href = e.currentTarget.getAttribute('href') || '#contact';
+        const target = document.querySelector(href);
+
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
         <section>
@@ -46,7 +57,9 @@ const Hero: FC = () => {
                                 }}
                             >
                                 <Button
+                                    onClick={handleClickNavItem}
                                     variant="secondary"
+                                    href="#projects"
                                     iconAfter={
                                         <div className="overflow-hidden size-5">
                                             <div
@@ -95,7 +108,7 @@ const Hero: FC = () => {
                                     delay: 2.2,
                                 }}
                             >
-                                <Button variant="text">Let&apos;s Talk</Button>
+                                <Button onClick={handleClickNavItem} variant="text" href="#contact">Let&apos;s Talk</Button>
                             </motion.div>
                         </div>
                     </div>
