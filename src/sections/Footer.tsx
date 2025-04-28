@@ -1,37 +1,65 @@
-import { FC } from "react";
+"use client";
+
+import {FC, MouseEvent, useEffect} from "react";
 import Button from "@/src/components/Button";
+import useTextRevealAnimation from "@/src/hooks/useTextRevealAnimation";
+import {useInView} from "framer-motion";
 
 const navItems = [
     {
-        href: "#",
-        label: "Home",
+        href: "#intro",
+        label: "About",
     },
     {
-        href: "#",
+        href: "#projects",
         label: "Projects",
     },
     {
-        href: "#",
+        href: "#testimonials",
         label: "Testimonials",
     },
     {
-        href: "#",
-        label: "Contact",
+        href: "#faqs",
+        label: "Faqs",
     },
+    {
+        href: "#contact",
+        label: "Contact",
+    }
 ];
 
 const Footer: FC = () => {
+    const { scope, entranceAnimation } = useTextRevealAnimation();
+    const inView = useInView(scope);
+
+    useEffect(() => {
+        if (inView){
+            entranceAnimation();
+        }
+    }, [inView, entranceAnimation]);
+
+    const handleClickNavItem = (e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+        e.preventDefault();
+
+
+        const href = e.currentTarget.getAttribute('href') || '#contact';
+        const target = document.querySelector(href);
+
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <footer className="bg-gray-green-900 text-white" id="contact">
             <div className="container">
                 <div className="section">
                     <div className="flex items-center gap-3">
-                        <div className="size-3 rounded-full bg-green-400"></div>
+                        <div className="size-3 rounded-full bg-green-400 animate-pulse"></div>
                         <span className="uppercase">Get In Touch</span>
                     </div>
                     <div className="grid md:grid-cols-3 md:items-center">
                         <div className="md:col-span-2">
-                            <h2 className="text-4xl mt-8 md:text-7xl lg:text-8xl font-extralight">
+                            <h2 className="text-4xl mt-8 md:text-7xl lg:text-8xl font-extralight" ref={scope}>
                                 Enough talk, Let&apos;s build greatness together.
                             </h2>
                             <a href="mailto:devmadhan24@gmail.com"
@@ -40,20 +68,38 @@ const Footer: FC = () => {
                                     variant="secondary"
                                     className="mt-8"
                                     iconAfter={
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            className="size-6"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
+                                        <div className='size-6 overflow-hidden'>
+                                            <div className='w-12 h-6 flex transition-transform duration-300 group-hover/button:-translate-x-1/2'>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1.5"
+                                                    stroke="currentColor"
+                                                    className="size-6"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                                                    />
+                                                </svg>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth="1.5"
+                                                    stroke="currentColor"
+                                                    className="size-6"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     }
                                 >
                                     devmadhan24@gmail.com
@@ -63,7 +109,7 @@ const Footer: FC = () => {
                         <div className="">
                             <nav className="flex flex-col md:items-end gap-8 mt-16 md:mt-0">
                                 {navItems.map(({ href, label }) => (
-                                    <a href={href} key={label}>
+                                    <a href={href} key={label} onClick={handleClickNavItem}>
                                         <Button variant="text" className="text-lg">
                                             {label}
                                         </Button>
