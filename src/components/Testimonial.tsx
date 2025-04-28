@@ -59,18 +59,11 @@ const Testimonial = (props: {
     return (
         <div className={twMerge('grid md:grid-cols-5 md:gap-8 lg:gap-16 md:items-center', className)} {...rest}>
             <div className="aspect-square md:col-span-2 md:aspect-[9/16] relative">
-                <motion.div className='absolute h-full bg-gray-green-900' initial={{
-                    width: '100%'
-                }}
-                            animate={{
-                                width: 0
-                            }}
-                            exit={{
-                                width: '100%'
-                            }}
-                            transition={{
-                                duration: 0.5
-                            }}
+                <motion.div className='absolute h-full bg-gray-green-900'
+                            initial={{ width: '100%' }}
+                            animate={{ width: 0 }}
+                            exit={{ width: '100%' }}
+                            transition={{ duration: 0.5 }}
                 >
 
                 </motion.div>
