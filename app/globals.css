@@ -65,7 +65,7 @@
   }
 
   .section{
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-20 md:py-32 lg:py-40;
   }
 
   /* Padding based on screen sizes */
