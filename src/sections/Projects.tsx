@@ -1,10 +1,10 @@
 import {FC} from "react";
 import image1 from "@/src/assets/images/renzo-cruz.png";
-import image2 from "@/src/assets/images/nestleap.jpg";
-import image3 from "@/src/assets/images/cafe.jpg";
-import image4 from "@/src/assets/images/fuseflux.jpg";
-import image5 from "@/src/assets/images/pattio.jpg";
-import image6 from "@/src/assets/images/vivid-lux.jpg";
+import image2 from "@/src/assets/images/Converso - Thumbnail.png";
+import image3 from "@/src/assets/images/nestleap.jpg";
+import image4 from "@/src/assets/images/cafe.jpg";
+import image5 from "@/src/assets/images/fuseflux.jpg";
+import image6 from "@/src/assets/images/pattio.jpg";
 import Image from "next/image";
 
 // Updated projects array with websiteUrl property
@@ -15,29 +15,29 @@ const projects = [
         websiteUrl: "https://renzo-cruz.netlify.app/", // Replace with actual URL
     },
     {
-        name: "Nestleap",
+        name: "Converso - SAAS Application",
         image: image2,
+        websiteUrl: "https://converso-learn.vercel.app/", // Replace with actual URL
+    },
+    {
+        name: "Nestleap",
+        image: image3,
         websiteUrl: "https://nestleap.netlify.app/", // Replace with actual URL
     },
     {
         name: "Cafe",
-        image: image3,
+        image: image4,
         websiteUrl: "https://coffee-webpage-site.netlify.app/", // Replace with actual URL
     },
     {
         name: "FuseFlux",
-        image: image4,
+        image: image5,
         websiteUrl: "https://fuseflux.netlify.app/", // Replace with actual URL
     },
     {
         name: "Pattio",
-        image: image5,
-        websiteUrl: "https://pattio.netlify.app/", // Replace with actual URL
-    },
-    {
-        name: "VividLux",
         image: image6,
-        websiteUrl: "https://vividlux.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://pattio.netlify.app/", // Replace with actual URL
     },
 ];
 
