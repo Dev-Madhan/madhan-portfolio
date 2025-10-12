@@ -2,7 +2,7 @@ import {FC} from "react";
 import image1 from "@/src/assets/images/renzo-cruz.png";
 import image2 from "@/src/assets/images/Converso - Thumbnail.png";
 import image3 from "@/src/assets/images/nestleap.jpg";
-import image4 from "@/src/assets/images/cafe.jpg";
+import image4 from "@/src/assets/images/Esperanza - Thumbnail.png";
 import image5 from "@/src/assets/images/SKILLCLEAR - Thumbnail.png";
 import image6 from "@/src/assets/images/pattio.jpg";
 import Image from "next/image";
@@ -25,9 +25,9 @@ const projects = [
         websiteUrl: "https://nestleap.netlify.app/", // Replace with actual URL
     },
     {
-        name: "Cafe",
+        name: "Esperanza",
         image: image4,
-        websiteUrl: "https://coffee-webpage-site.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://esperanza2k25.netlify.app/", // Replace with actual URL
     },
     {
         name: "Skill Clear",
