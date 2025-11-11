@@ -50,7 +50,7 @@ const Footer: FC = () => {
     };
 
     return (
-        <footer className="bg-gray-green-900 text-white" id="contact">
+        <footer className="bg-navy-neutral-900 text-white" id="contact">
             <div className="container">
                 <div className="section">
                     <div className="flex items-center gap-3">
@@ -110,7 +110,7 @@ const Footer: FC = () => {
                             <nav className="flex flex-col md:items-end gap-8 mt-16 md:mt-0">
                                 {navItems.map(({ href, label }) => (
                                     <a href={href} key={label} onClick={handleClickNavItem}>
-                                        <Button variant="text" className="text-lg">
+                                        <Button variant="text" className="text-lg hover:border-b-2">
                                             {label}
                                         </Button>
                                     </a>

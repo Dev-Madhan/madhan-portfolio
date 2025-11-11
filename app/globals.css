@@ -6,19 +6,23 @@
     /* Screen sizes */
     --screen-sm: 375px;
     --screen-md: 768px;
-    --screen-lg: 1200px;
+    --screen-lg: 1024px;
+    --screen-xl: 1280px;
 
-    /* Define red-orange-500 using color-mix */
-    --gray-green-500: color-mix(in srgb, #474747 50%, #7C8652 50%);
-    --gray-green-alt-500: color-mix(in srgb, #474747 50%, #7C8652 50%);
-    --gray-green-800: color-mix(in srgb, #0d0d0d 80%, #7C8652 20%);
-    --gray-green-900: color-mix(in srgb, #0d0d0d 90%, #7C8652 10%);
+    /* Define navy–neutral palette based on the image */
+    --navy-neutral-500: color-mix(in srgb, #1C2A39 60%, #6C757D 40%);
+    --navy-neutral-alt-500: color-mix(in srgb, #1C2A39 50%, #6C757D 50%);
+    --navy-neutral-800: color-mix(in srgb, #0F141B 85%, #6C757D 15%);
+    --navy-neutral-900: color-mix(in srgb, #0A0E13 90%, #6C757D 10%);
 
+    /* Accent and highlight tones */
+    --skin-warm-400: #C9956D; /* Natural skin warmth */
+    --skin-warm-500: #A87453; /* Deeper skin shadow tone */
+    --white-soft-100: #F7F7F7; /* Shirt & background white tone */
+    --metal-silver-400: #BFC2C7; /* Watch & cool light tone */
 
-
-
-    /* Define light color for border */
-    --border-light: #e5e7eb; /* Soft gray for light border */
+    /* Border */
+    --border-light: #E5E7EB;
 
     /* Font family */
     --font-archivo: "Archivo", sans-serif;
@@ -27,28 +31,36 @@
 
 /* Extend container styles */
 @layer utilities {
-  .bg-red-orange-500 {
-    background-color: var(--gray-green-500);
+  .bg-navy-neutral-500 {
+    background-color: var(--navy-neutral-500);
   }
 
-  .bg-gray-green-800{
-    background-color:  var(--gray-green-800);
+  .bg-navy-neutral-800 {
+    background-color: var(--navy-neutral-800);
   }
 
-  .bg-gray-green-500{
-    background-color:  var(--gray-green-alt-500);
+  .bg-navy-neutral-900 {
+    background-color: var(--navy-neutral-900);
   }
 
-  .bg-gray-green-900{
-    background-color:  var(--gray-green-900);
+  .text-navy-neutral-500 {
+    color: var(--navy-neutral-500);
   }
 
-  .border-red-orange-500 {
-    border-color: var(--gray-green-500);
+  .border-navy-neutral-500 {
+    border-color: var(--navy-neutral-500);
   }
 
-  .text-red-orange-500 {
-    color: var(--gray-green-500);
+  .text-skin-warm-400 {
+    color: var(--skin-warm-400);
+  }
+
+  .bg-skin-warm-500 {
+    background-color: var(--skin-warm-500);
+  }
+
+  .text-white-soft-100 {
+    color: var(--white-soft-100);
   }
 
   .border-light {
@@ -64,7 +76,7 @@
     max-width: 100%;
   }
 
-  .section{
+  .section {
     @apply py-24 md:py-32 lg:py-40;
   }
 
@@ -89,7 +101,20 @@
   }
 }
 
-/* Ensure font family is applied globally */
+/* globals.css */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .font-lg-only {
+    font-size: 3.75rem; /* 6xl */
+  }
+}
+@media (min-width: 1280px) {
+  .font-xl-only {
+    font-size: 4.5rem; /* 7xl */
+  }
+}
+
+
+/* Global font */
 @layer base {
   html {
     font-family: var(--font-archivo), sans-serif;
@@ -97,22 +122,22 @@
 }
 
 body {
-  font-family: var(--font-archivo), sans-serif; /* Apply the font globally to the body */
+  font-family: var(--font-archivo), sans-serif;
 }
 
 button {
-  border: 2px solid var(--gray-green-500);
+  border: 2px solid var(--navy-neutral-500);
   padding: 0.5rem 1rem;
 }
 
 .line {
-    @apply overflow-hidden inline-block; /* Ensure lines are inline-block to prevent layout issues */
+  @apply overflow-hidden inline-block;
 }
 
 .word {
-    @apply inline-block; /* Words should be inline-block for proper positioning */
-    transform: translateY(100%); /* Initial state: off-screen */
-    opacity: 0; /* Optional: Start with zero opacity for fade-in effect */
+  @apply inline-block;
+  transform: translateY(100%);
+  opacity: 0;
 }
 
 .cursor-pointer {

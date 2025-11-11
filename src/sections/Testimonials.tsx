@@ -85,7 +85,7 @@ const Testimonials: FC = () => {
     return (
         <section className="section" id="testimonials">
             <h2
-                className="text-4xl md:text-7xl lg:text-8xl flex flex-col overflow-hidden tracking-tighter"
+                className="text-4xl md:text-7xl lg:text-8xl xl:text-9xl flex flex-col overflow-hidden tracking-tighter"
                 ref={titleRef}
             >
                 <motion.span
@@ -97,7 +97,7 @@ const Testimonials: FC = () => {
                     Fresh props from my former clients
                 </motion.span>
                 <motion.span
-                    className="whitespace-nowrap self-end text-red-orange-500 font-medium"
+                    className="whitespace-nowrap self-end text-navy-neutral-500 font-medium"
                     style={{
                         transform: transformBottom,
                     }}
@@ -126,7 +126,7 @@ const Testimonials: FC = () => {
                 </div>
                 <div className="flex gap-4 mt-6 lg:mt-10">
                     <button
-                        className="border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium cursor-pointer hover:bg-stone-800 hover:text-white hover:border-red-orange-500 transition-all duration-300"
+                        className="border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium cursor-pointer hover:bg-slate-800 hover:text-white hover:border-red-orange-500 transition-all duration-300"
                         onClick={handleClickPrev}
                     >
                         <svg
@@ -145,7 +145,7 @@ const Testimonials: FC = () => {
                         </svg>
                     </button>
                     <button
-                        className="border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium cursor-pointer hover:bg-stone-800 hover:text-white hover:border-red-orange-500 transition-all duration-300"
+                        className="border border-stone-400 size-13 inline-flex rounded-full justify-center items-center font-medium cursor-pointer hover:bg-slate-800 hover:text-white hover:border-red-orange-500 transition-all duration-300"
                         onClick={handleClickNext}
                     >
                         <svg

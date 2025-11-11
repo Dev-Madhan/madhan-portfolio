@@ -12,11 +12,11 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({ className, children, variant, iconAfter, href, ...rest }) => {
     const baseClasses = twMerge(
-        'h-11 px-6 rounded-xl border-red-orange-500 uppercase inline-flex items-center gap-2 font-medium relative transition duration-500 group/button',
-        variant === 'primary' && 'border bg-red-orange-500 text-white',
-        variant === 'secondary' && 'border-2 bg-transparent hover:bg-stone-700 hover:text-white', // Changed border to border-2
+        'h-11 px-6 rounded-xl border-navy-neutral-alt-900 uppercase inline-flex items-center gap-2 font-medium relative transition duration-500 group/button',
+        variant === 'primary' && 'border bg-navy-neutral-500 text-white',
+        variant === 'secondary' && 'border-2 bg-transparent hover:bg-slate-900 hover:text-white', // Changed border to border-2
         variant === 'text' &&
-        'h-auto px-2 !border-transparent after:content-[""] after:h-px after:w-0 after:absolute after:left-0 after:bottom-0 after:bg-stone-700 hover:after:w-full after:transition-all after:duration-500 after:ease-in-out',
+        'h-auto px-2 !border-transparent after:content-[""] after:h-px after:w-0 after:absolute after:left-0 after:bottom-0 after:bg-slate-700 hover:after:w-full after:transition-all after:duration-500 after:ease-in-out',
         className
     );
 

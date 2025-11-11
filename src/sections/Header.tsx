@@ -120,7 +120,7 @@ const Header: FC = () => {
 
     return (
         <header>
-            <div className='fixed top-0 left-0 w-full h-0 overflow-hidden bg-gray-green-900 z-10' ref={navScope}>
+            <div className='fixed top-0 left-0 w-full h-0 overflow-hidden bg-navy-neutral-900 z-10' ref={navScope}>
                 <nav className='mt-20 flex flex-col'>
                     {navItems.map(({ label, href }) => (
                         <a
@@ -149,7 +149,7 @@ const Header: FC = () => {
                                 </svg>
                             </div>
                             <div
-                                className='absolute w-full h-0 bg-gray-green-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-10'
+                                className='absolute w-full h-0 bg-navy-neutral-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-10'
                             ></div>
                         </a>
                     ))}
@@ -172,7 +172,7 @@ const Header: FC = () => {
                     <div className='flex justify-end h-20 items-center'>
                         <div className='flex items-center gap-4'>
                             <div
-                                className='size-11 border border-stone-400 rounded-full inline-flex items-center justify-center bg-stone-200'
+                                className='size-11 border-2 border-stone-400 rounded-full inline-flex items-center justify-center bg-stone-200'
                                 onClick={() => setIsOpen(!isOpen)}
                             >
                                 <svg
