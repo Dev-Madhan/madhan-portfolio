@@ -17,33 +17,6 @@ Welcome to my personal portfolio repository! This project showcases my skills, p
 - **Version Control**: Git, GitHub
 - **Others**: Node.js, npm, Vite (or Create React App, based on setup)
 
-## Setup Instructions 📚
-
-To run this portfolio locally, follow these steps:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Dev-Madhan/madhan-portfolio.git
-   cd madhan-kumar-portfolio
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Run the Development Server**:
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:5173` (or the specified port) in your browser to view the portfolio.
-
-4. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-   The optimized build will be generated in the `dist` folder.
-
 ## Preview Image 📸
 
 ![Portfolio Preview](preview.png)
