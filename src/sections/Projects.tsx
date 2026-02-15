@@ -1,18 +1,18 @@
 import {FC} from "react";
-import image1 from "@/src/assets/images/renzo-cruz.png";
-import image2 from "@/src/assets/images/Converso - Thumbnail.png";
-import image3 from "@/src/assets/images/nestleap.jpg";
-import image4 from "@/src/assets/images/Esperanza - Thumbnail.png";
-import image5 from "@/src/assets/images/SKILLCLEAR - Thumbnail.png";
-import image6 from "@/src/assets/images/pattio.jpg";
+import image1 from "@/src/assets/images/prakash-portfolio.png";
+import image2 from "@/src/assets/images/converso-thumbnail.png";
+import image3 from "@/src/assets/images/only-students.png";
+import image4 from "@/src/assets/images/esperanza-thumbnail.png";
+import image5 from "@/src/assets/images/skillclear-thumbnail.png";
+import image6 from "@/src/assets/images/seo-speeder.png";
 import Image from "next/image";
 
 // Updated projects array with websiteUrl property
 const projects = [
     {
-        name: "Renzo Cruz - Portfolio",
+        name: "Prakash - Portfolio",
         image: image1,
-        websiteUrl: "https://renzo-cruz.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://siva-prakash-portfolio.vercel.app/", // Replace with actual URL
     },
     {
         name: "Converso",
@@ -20,14 +20,14 @@ const projects = [
         websiteUrl: "https://converso-learn.vercel.app/", // Replace with actual URL
     },
     {
-        name: "Nestleap",
+        name: "Only Students",
         image: image3,
-        websiteUrl: "https://nestleap.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://only-student.vercel.app/", // Replace with actual URL
     },
     {
         name: "Esperanza",
         image: image4,
-        websiteUrl: "https://esperanza2k25.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://esperanza2k26.vercel.app/", // Replace with actual URL
     },
     {
         name: "Skill Clear",
@@ -35,9 +35,9 @@ const projects = [
         websiteUrl: "https://skillclear.vercel.app/", // Replace with actual URL
     },
     {
-        name: "Pattio",
+        name: "Seo Speeder",
         image: image6,
-        websiteUrl: "https://pattio.netlify.app/", // Replace with actual URL
+        websiteUrl: "https://seospeeder.vercel.app/", // Replace with actual URL
     },
 ];
 
