@@ -27,7 +27,7 @@ const Intro: FC = () => {
       >
         <div className="container">
           <h2 className="text-4xl md:text-7xl lg:text-8xl lg:w-[80%] font-medium" ref={scope}>
-              Aspiring Front-end Developer creating striking, clean-coded websites to elevate businesses online
+              Front-end Developer crafting striking, high-performance websites that elevate businesses online
           </h2>
         </div>
       </section>
