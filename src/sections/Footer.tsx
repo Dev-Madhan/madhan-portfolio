@@ -4,6 +4,7 @@ import {FC, MouseEvent, useEffect} from "react";
 import Button from "@/src/components/Button";
 import useTextRevealAnimation from "@/src/hooks/useTextRevealAnimation";
 import {useInView} from "framer-motion";
+import { TextRoll } from "../components/ui/skiper-ui/skiper58";
 
 const navItems = [
     {
@@ -109,10 +110,19 @@ const Footer: FC = () => {
                         <div className="">
                             <nav className="flex flex-col md:items-end gap-8 mt-16 md:mt-0">
                                 {navItems.map(({ href, label }) => (
-                                    <a href={href} key={label} onClick={handleClickNavItem}>
-                                        <Button variant="text" className="text-lg hover:border-b-2">
+                                    <a
+                                        href={href}
+                                        key={label}
+                                        onClick={handleClickNavItem}
+                                        className="inline-block cursor-pointer text-white text-lg"
+                                        style={{ fontFamily: "var(--font-inter), sans-serif", fontWeight: 500, letterSpacing: "0.13em", textTransform: "uppercase" }}
+                                    >
+                                        <TextRoll
+                                            center
+                                            className="font-[500] tracking-[0.13em] uppercase text-lg"
+                                        >
                                             {label}
-                                        </Button>
+                                        </TextRoll>
                                     </a>
                                 ))}
                             </nav>

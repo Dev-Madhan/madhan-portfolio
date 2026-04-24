@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 
 const archivoFont = Archivo({
   display: 'swap',
   weight: 'variable',
   variable: "--font-archivo",
+  subsets: ["latin"],
+});
+
+const interFont = Inter({
+  display: 'swap',
+  weight: 'variable',
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -24,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${archivoFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
+        className={`${archivoFont.variable} ${interFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
       >
         {children}
       </body>

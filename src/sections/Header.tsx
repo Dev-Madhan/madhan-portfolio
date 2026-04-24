@@ -1,220 +1,137 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import Button from "@/src/components/Button";
-import { motion, useAnimate } from "framer-motion";
-import { MouseEvent } from 'react';
+import { MouseEvent } from "react";
+import { TextRoll } from "../components/ui/skiper-ui/skiper58";
 
 const navItems = [
-    {
-        label: "About",
-        href: "#intro",
-    },
-    {
-        label: "Signature Pieces",
-        href: "#projects",
-    },
-    {
-        label: "Testimonials",
-        href: "#testimonials",
-    },
-    {
-        label: "FAQs",
-        href: "#faqs",
-    },
-    {
-        label: "Contact",
-        href: "#contact",
-    },
+    { label: "Home", href: "#" },
+    { label: "Works", href: "#projects" },
+    { label: "About", href: "#intro" },
+    { label: "Contact", href: "#contact" },
 ];
 
+/* ── Shared meta text style ─────────────────────────────────────────── */
+const metaStyle: React.CSSProperties = {
+    fontWeight: 500,
+    letterSpacing: "0.13em",
+    textTransform: "uppercase" as const,
+    whiteSpace: "nowrap",
+};
+const metaSizeClass = "text-[9px] md:text-[11px]";
+
+/* ── NavLink: skiper58 TextRoll per-character stagger on hover ───────── */
+const NavLink: FC<{
+    label: string;
+    href: string;
+    onClick: (e: MouseEvent<HTMLAnchorElement>) => void;
+}> = ({ label, href, onClick }) => {
+    return (
+        <a
+            href={href}
+            onClick={onClick}
+            className={`inline-block cursor-pointer text-white ${metaSizeClass}`}
+            style={{ fontFamily: "var(--font-inter), sans-serif", ...metaStyle }}
+        >
+            <TextRoll
+                center
+                className={`font-[500] tracking-[0.13em] uppercase ${metaSizeClass}`}
+            >
+                {label}
+            </TextRoll>
+        </a>
+    );
+};
+
+/* ── Header ─────────────────────────────────────────────────────────── */
 const Header: FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [topLineScope, topLineAnimate] = useAnimate();
-    const [bottomLineScope, bottomLineAnimate] = useAnimate();
-    const [navScope, navAnimate] = useAnimate();
+    const [time, setTime] = useState("");
 
     useEffect(() => {
-        if (isOpen) {
-            topLineAnimate([
-                [
-                    topLineScope.current,
-                    {
-                        translateY: 4
-                    }
-                ],
-                [
-                    topLineScope.current,
-                    {
-                        rotate: 45
-                    },
-                ],
-            ]);
+        const fmt = () =>
+            new Date().toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+            });
+        setTime(fmt());
+        const id = setInterval(() => setTime(fmt()), 30_000);
+        return () => clearInterval(id);
+    }, []);
 
-            bottomLineAnimate([
-                [
-                    bottomLineScope.current,
-                    {
-                        translateY: -4
-                    }
-                ],
-                [
-                    bottomLineScope.current,
-                    {
-                        rotate: -45
-                    },
-                ],
-            ]);
-
-            navAnimate(navScope.current, {
-                    height: '100%',
-                },
-                {
-                    duration: 0.7,
-                });
-        } else {
-            topLineAnimate([
-                [
-                    topLineScope.current,
-                    {
-                        rotate: 0,
-                    }
-                ],
-                [
-                    topLineScope.current,
-                    {
-                        translateY: 0,
-                    }
-                ]
-            ]);
-
-            bottomLineAnimate([
-                [
-                    bottomLineScope.current,
-                    {
-                        rotate: 0,
-                    }
-                ],
-                [
-                    bottomLineScope.current,
-                    {
-                        translateY: 0,
-                    }
-                ]
-            ]);
-
-            navAnimate(navScope.current, { height: 0 });
-        }
-    }, [isOpen, topLineAnimate, topLineScope, bottomLineAnimate, bottomLineScope, navScope, navAnimate]);
-
-    const handleClickNavItem = (e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    const handleNav = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        setIsOpen(false);
-
-        const href = e.currentTarget.getAttribute('href') || '#contact';
+        const href = e.currentTarget.getAttribute("href") || "#";
+        if (href === "#") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
         const target = document.querySelector(href);
-
         if (!target) return;
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: "smooth" });
     };
+
+    const Dot = () => (
+        <span
+            aria-hidden="true"
+            style={{
+                display: "inline-block",
+                width: "5px",
+                height: "5px",
+                borderRadius: "50%",
+                backgroundColor: "white",
+                flexShrink: 0,
+            }}
+        />
+    );
 
     return (
         <header>
-            <div className='fixed top-0 left-0 w-full h-0 overflow-hidden bg-navy-neutral-900 z-10' ref={navScope}>
-                <nav className='mt-20 flex flex-col'>
-                    {navItems.map(({ label, href }) => (
-                        <a
-                            href={href}
-                            key={label}
-                            className='text-stone-200 border-t last:border-b border-stone-800 py-8 group/nav-item relative isolate'
-                            onClick={handleClickNavItem}
-                        >
-                            <div className='container !max-w-full flex items-center justify-between'>
-                                <span className='text-3xl group-hover/nav-item:pl-4 transition-all duration-500'>
-                                    {label}
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="size-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                    />
-                                </svg>
-                            </div>
-                            <div
-                                className='absolute w-full h-0 bg-navy-neutral-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-10'
-                            ></div>
-                        </a>
-                    ))}
-                </nav>
-            </div>
-            <div className='fixed top-0 left-0 w-full mix-blend-difference backdrop-blur-md z-10'>
-                <div className='container !max-w-full'>
-                    <div className='flex justify-between h-20 items-center'>
-                        <div>
-                            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                            <a href="/">
-                                <span className='text-xl font-bold uppercase text-white'>Madhan Kumar</span>
-                            </a>
+            <div
+                className="fixed top-0 left-0 w-full z-50"
+                style={{
+                    height: "44px",
+                    background: "transparent",
+                    mixBlendMode: "difference",
+                }}
+            >
+                <div
+                    className="flex items-center justify-between h-full w-full"
+                    style={{
+                        paddingLeft: "1.5rem",
+                        paddingRight: "1.5rem",
+                        fontFamily: "var(--font-inter), sans-serif",
+                    }}
+                >
+                    {/* ── Left meta ──────────────────────────────── */}
+                    <div className="flex items-center gap-5" style={{ flexShrink: 0 }}>
+                        <div className="flex items-center gap-2">
+                            <Dot />
+                            <span className={`text-white ${metaSizeClass}`} style={metaStyle}>
+                                Chennai, IN
+                            </span>
                         </div>
+
+                        <span className={`hidden md:inline text-white ${metaSizeClass}`} style={metaStyle}>
+                            {time}&nbsp;&nbsp;IST +5:30
+                        </span>
+
+                        <span className={`hidden lg:inline text-white ${metaSizeClass}`} style={metaStyle}>
+                            13.0827° N, 80.2707° E
+                        </span>
                     </div>
-                </div>
-            </div>
-            <div className='fixed top-0 left-0 w-full z-10'>
-                <div className='container !max-w-full'>
-                    <div className='flex justify-end h-20 items-center'>
-                        <div className='flex items-center gap-4'>
-                            <div
-                                className='size-11 border-2 border-stone-400 rounded-full inline-flex items-center justify-center bg-stone-200'
-                                onClick={() => setIsOpen(!isOpen)}
-                            >
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <motion.rect
-                                        x="3"
-                                        y="7"
-                                        width="18"
-                                        height="2"
-                                        fill="currentColor"
-                                        ref={topLineScope}
-                                        style={{
-                                            transformOrigin: '12px 8px',
-                                        }}
-                                    />
-                                    <motion.rect
-                                        x="3"
-                                        y="15"
-                                        width="18"
-                                        height="2"
-                                        fill="currentColor"
-                                        ref={bottomLineScope}
-                                        style={{
-                                            transformOrigin: '12px 16px',
-                                        }}
-                                    />
-                                </svg>
-                            </div>
-                            <Button
-                                variant="primary"
-                                className='hidden md:inline-flex cursor-pointer'
-                                onClick={handleClickNavItem}
-                            >
-                                Contact Me
-                            </Button>
-                        </div>
-                    </div>
+
+                    {/* ── Right: nav links ───────────────────────── */}
+                    <nav className="flex items-center gap-5 sm:gap-7 md:gap-9">
+                        {navItems.map(({ label, href }) => (
+                            <NavLink
+                                key={label}
+                                label={label}
+                                href={href}
+                                onClick={handleNav}
+                            />
+                        ))}
+                    </nav>
                 </div>
             </div>
         </header>
