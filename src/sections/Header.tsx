@@ -13,12 +13,11 @@ const navItems = [
 
 /* ── Shared meta text style ─────────────────────────────────────────── */
 const metaStyle: React.CSSProperties = {
-    fontWeight: 500,
     letterSpacing: "0.13em",
     textTransform: "uppercase" as const,
     whiteSpace: "nowrap",
 };
-const metaSizeClass = "text-[9px] md:text-[11px]";
+const metaSizeClass = "font-[600] md:font-[500] text-[9px] md:text-[11px]";
 
 /* ── NavLink: skiper58 TextRoll per-character stagger on hover ───────── */
 const NavLink: FC<{
@@ -35,7 +34,7 @@ const NavLink: FC<{
         >
             <TextRoll
                 center
-                className={`font-[500] tracking-[0.13em] uppercase ${metaSizeClass}`}
+                className={`tracking-[0.13em] uppercase ${metaSizeClass}`}
             >
                 {label}
             </TextRoll>
@@ -122,7 +121,7 @@ const Header: FC = () => {
                     </div>
 
                     {/* ── Right: nav links ───────────────────────── */}
-                    <nav className="flex items-center gap-5 sm:gap-7 md:gap-9">
+                    <nav className="flex items-center gap-3 sm:gap-5 md:gap-7">
                         {navItems.map(({ label, href }) => (
                             <NavLink
                                 key={label}
