@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Inter } from "next/font/google";
+import { Archivo, Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
 const archivoFont = Archivo({
@@ -16,7 +16,12 @@ const interFont = Inter({
   subsets: ["latin"],
 });
 
-
+const bebasFont = Bebas_Neue({
+  display: 'swap',
+  weight: "400",
+  variable: "--font-bebas",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Madhan Kumar",
@@ -31,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${archivoFont.variable} ${interFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
+        className={`${archivoFont.variable} ${interFont.variable} ${bebasFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
       >
         {children}
       </body>

@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { MouseEvent } from "react";
 import { TextRoll } from "../components/ui/skiper-ui/skiper58";
+import { motion } from "framer-motion";
 
 const navItems = [
     { label: "Home", href: "#" },
@@ -85,31 +86,31 @@ const Header: FC = () => {
     );
 
     return (
-        <header>
+        <motion.header
+            initial={{ opacity: 0, y: -44 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-0 left-0 w-full z-50"
+            style={{
+                height: "44px",
+                background: "transparent",
+                mixBlendMode: "difference",
+            }}
+        >
             <div
-                className="fixed top-0 left-0 w-full z-50"
+                className="flex items-center justify-between h-full w-full px-6 md:px-10"
                 style={{
-                    height: "44px",
-                    background: "transparent",
-                    mixBlendMode: "difference",
+                    fontFamily: "var(--font-inter), sans-serif",
                 }}
             >
-                <div
-                    className="flex items-center justify-between h-full w-full"
-                    style={{
-                        paddingLeft: "1.5rem",
-                        paddingRight: "1.5rem",
-                        fontFamily: "var(--font-inter), sans-serif",
-                    }}
-                >
-                    {/* ── Left meta ──────────────────────────────── */}
-                    <div className="flex items-center gap-5" style={{ flexShrink: 0 }}>
-                        <div className="flex items-center gap-2">
-                            <Dot />
-                            <span className={`text-white ${metaSizeClass}`} style={metaStyle}>
-                                Chennai, IN
-                            </span>
-                        </div>
+                {/* ── Left meta ──────────────────────────────── */}
+                <div className="flex items-center gap-5" style={{ flexShrink: 0 }}>
+                    <div className="flex items-center gap-2">
+                        <Dot />
+                        <span className={`text-white ${metaSizeClass}`} style={metaStyle}>
+                            Chennai, IN
+                        </span>
+                    </div>
 
                         <span className={`hidden md:inline text-white ${metaSizeClass}`} style={metaStyle}>
                             {time}&nbsp;&nbsp;IST +5:30
@@ -132,8 +133,7 @@ const Header: FC = () => {
                         ))}
                     </nav>
                 </div>
-            </div>
-        </header>
+        </motion.header>
     );
 };
 
