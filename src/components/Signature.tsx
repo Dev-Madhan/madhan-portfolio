@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function Signature({ isMobile = false }: { isMobile?: boolean }): JSX.Element {
+export default function Signature({ isMobile = false }: { isMobile?: boolean }) {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
