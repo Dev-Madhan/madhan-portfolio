@@ -85,6 +85,13 @@ const TechStack: FC = () => {
                 tagName: "span",
             });
 
+            // Set initial hidden states immediately to prevent flash on refresh
+            gsap.set(labelRef.current, { y: 16, opacity: 0 });
+            gsap.set(split.chars, { y: "120%", opacity: 0 });
+            gsap.set(descRef.current, { y: 28, opacity: 0 });
+            const cards = gsap.utils.toArray<HTMLElement>(".tech-card", gridRef.current);
+            gsap.set(cards, { y: 56, opacity: 0 });
+
             // ── 2. Master timeline triggered by section entering viewport ──
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -95,35 +102,34 @@ const TechStack: FC = () => {
             });
 
             // Step 1 — Label fades up
-            tl.from(labelRef.current, {
-                y: 16,
-                opacity: 0,
+            tl.to(labelRef.current, {
+                y: 0,
+                opacity: 1,
                 duration: 0.5,
                 ease: "power2.out",
             });
 
             // Step 2 — Heading chars sweep up from below (letterpress)
-            tl.from(split.chars, {
-                y: "120%",
-                opacity: 0,
+            tl.to(split.chars, {
+                y: "0%",
+                opacity: 1,
                 duration: 0.75,
                 stagger: 0.028,
                 ease: "power4.out",
             }, "-=0.2");
 
             // Step 3 — Description slides up
-            tl.from(descRef.current, {
-                y: 28,
-                opacity: 0,
+            tl.to(descRef.current, {
+                y: 0,
+                opacity: 1,
                 duration: 0.6,
                 ease: "power2.out",
             }, "-=0.45");
 
             // Step 4 — Cards wipe in from bottom, staggered row by row
-            const cards = gsap.utils.toArray<HTMLElement>(".tech-card", gridRef.current);
-            tl.from(cards, {
-                y: 56,
-                opacity: 0,
+            tl.to(cards, {
+                y: 0,
+                opacity: 1,
                 duration: 0.65,
                 stagger: { each: 0.08, from: "start" },
                 ease: "power3.out",

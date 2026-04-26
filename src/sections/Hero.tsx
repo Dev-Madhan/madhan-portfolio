@@ -28,8 +28,6 @@ const Hero: FC = () => {
   const mobileScrollRef = useRef<HTMLDivElement>(null);
   const mobileLeftMetaRef = useRef<HTMLDivElement>(null);
   const mobileRightMetaRef = useRef<HTMLDivElement>(null);
-  const [titleLeft, setTitleLeft] = useState(0);
-  const [titleRight, setTitleRight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,6 +40,11 @@ const Hero: FC = () => {
   }, []);
 
   const gsapCtxRef = useRef<ReturnType<typeof gsap.context> | null>(null);
+
+  // Prevent GSAP from auto-refreshing (which scrolls to top) on every resize
+  useEffect(() => {
+    ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" });
+  }, []);
 
   useEffect(() => {
     const initGSAP = () => {
@@ -60,7 +63,6 @@ const Hero: FC = () => {
             pin: true,
             scrub: true,
             anticipatePin: 1,
-            invalidateOnRefresh: true,
           },
         });
 
@@ -158,34 +160,7 @@ const Hero: FC = () => {
 
     initGSAP();
 
-    // Measure the role offsets for bottom alignment
-    const updateTitleLeft = () => {
-      if (leftRoleRef.current) {
-        setTitleLeft(leftRoleRef.current.getBoundingClientRect().left);
-      }
-      if (rightRoleRef.current) {
-        setTitleRight(window.innerWidth - rightRoleRef.current.getBoundingClientRect().right);
-      }
-    };
-    updateTitleLeft();
-    window.addEventListener("resize", updateTitleLeft);
-
-    // Refresh on font load
-    if (document.fonts) {
-      document.fonts.ready.then(() => {
-        ScrollTrigger.refresh();
-        updateTitleLeft();
-      });
-    }
-
-    const timeoutId = setTimeout(() => {
-      ScrollTrigger.refresh();
-      updateTitleLeft();
-    }, 800);
-
     return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("resize", updateTitleLeft);
       gsapCtxRef.current?.revert();
       gsapCtxRef.current = null;
     };
@@ -226,6 +201,7 @@ const Hero: FC = () => {
               {/* 1. Hero Text (2 lines) - Starts center, moves top */}
               <div
                 ref={mobileNameRef}
+                style={{ transform: "translateY(25vh)" }}
                 className="flex flex-col items-center"
               >
                 <div>
@@ -251,14 +227,14 @@ const Hero: FC = () => {
 
               {/* 3. Role (2 lines) - Pops from bottom */}
               <div className="flex flex-col items-center">
-                <div ref={mobileRole1Ref}>
+                <div ref={mobileRole1Ref} style={{ opacity: 0, transform: "translateX(-50px)" }}>
                   <h2 className={`${bebasNeue.className} uppercase text-[20vw] leading-[0.8] tracking-normal`}>
                     <TextRollHorizontal triggerIntro={true} introDelay={3.2}>
                       FullStack
                     </TextRollHorizontal>
                   </h2>
                 </div>
-                <div ref={mobileRole2Ref}>
+                <div ref={mobileRole2Ref} style={{ opacity: 0, transform: "translateX(50px)" }}>
                   <h2 className={`${bebasNeue.className} uppercase text-[20vw] leading-[0.8] tracking-normal`}>
                     <TextRollHorizontal triggerIntro={true} introDelay={3.6}>
                       Engineer
@@ -270,6 +246,7 @@ const Hero: FC = () => {
               {/* 4. Scroll Down Indicator (Mobile Only) */}
               <div
                 ref={mobileScrollRef}
+                style={{ opacity: 0, transform: "translateY(40px)" }}
                 className="mt-16 mb-8 flex flex-col items-center"
               >
                 <p className="font-sans uppercase text-[3vw] tracking-[0.4em] text-black dark:text-white font-medium">
@@ -326,66 +303,67 @@ const Hero: FC = () => {
           <Signature isMobile={false} />
         </div>
 
-        {/* ── Bottom Left: Status ── */}
-        {/* Left-aligned with the left edge of "FULLSTACK" */}
-        <motion.div
-          initial={{ opacity: 0, x: -50, y: 0 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 1, delay: 3.0, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:flex absolute bottom-12 flex-col gap-1"
-          style={{ left: titleLeft }}
-        >
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
-            Availability
-          </span>
-          <span className={`${bebasNeue.className} text-3xl leading-none tracking-wide flex`}>
-            <TextRoll>Open To Work</TextRoll>
-          </span>
-        </motion.div>
+        {/* ── Bottom Bar: Status | Socials | View Projects ── */}
+        {/* Uses the same px-10 padding as the section so alignment is always correct */}
+        <div className="hidden md:flex absolute bottom-12 left-0 right-0 px-10 items-end justify-between">
+          {/* Bottom Left: Availability */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 3.0, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-1"
+          >
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
+              Availability
+            </span>
+            <span className={`${bebasNeue.className} text-3xl leading-none tracking-wide flex`}>
+              <TextRoll>Open To Work</TextRoll>
+            </span>
+          </motion.div>
 
-        {/* ── Bottom Center: Socials ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-1"
-        >
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
-            Socials
-          </span>
-          <div className="flex gap-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
-              <TextRoll>Github</TextRoll>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
-              <TextRoll>Instagram</TextRoll>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
-              <TextRoll>LinkedIn</TextRoll>
-            </a>
-          </div>
-        </motion.div>
+          {/* Bottom Center: Socials */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center gap-1"
+          >
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
+              Socials
+            </span>
+            <div className="flex gap-4">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
+                <TextRoll>Github</TextRoll>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
+                <TextRoll>Instagram</TextRoll>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-[0.15em] flex">
+                <TextRoll>LinkedIn</TextRoll>
+              </a>
+            </div>
+          </motion.div>
 
-        {/* ── Bottom Right: View Projects ── */}
-        {/* Right-aligned perfectly with the right edge of "ENGINEER" */}
-        <motion.div
-          initial={{ opacity: 0, x: 50, y: 0 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 1, delay: 3.4, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:flex absolute bottom-12 flex-col items-end gap-1"
-          style={{ right: titleRight }}
-        >
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
-            Selected Works
-          </span>
-          <a href="#works" className={`${bebasNeue.className} text-3xl leading-none tracking-wide flex`}>
-            <TextRoll>View Projects</TextRoll>
-          </a>
-        </motion.div>
+          {/* Bottom Right: View Projects */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 3.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-end gap-1"
+          >
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#111111]/40 dark:text-[#EAE8E3]/40">
+              Selected Works
+            </span>
+            <a href="#works" className={`${bebasNeue.className} text-3xl leading-none tracking-wide flex`}>
+              <TextRoll>View Projects</TextRoll>
+            </a>
+          </motion.div>
+        </div>
 
         {/* ── Mobile Side Meta Text ─────────────────────────────────── */}
         <div
           ref={mobileLeftMetaRef}
+          style={{ opacity: 0, transform: "translateX(-20px)" }}
           className="md:hidden absolute left-[-3vw] top-[45%] -translate-y-1/2 flex flex-col z-20 pointer-events-none"
         >
           <div className="h-[28vw] flex items-center justify-center">
@@ -401,6 +379,7 @@ const Hero: FC = () => {
 
         <div
           ref={mobileRightMetaRef}
+          style={{ opacity: 0, transform: "translateX(20px)" }}
           className="md:hidden absolute right-[-3vw] top-[45%] -translate-y-1/2 flex flex-col z-20 pointer-events-none"
         >
           <div className="h-[28vw] flex items-center justify-center">

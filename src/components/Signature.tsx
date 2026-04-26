@@ -12,56 +12,68 @@ export default function Signature({ isMobile = false }: { isMobile?: boolean }) 
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Select every single path in the signature
-    const paths = svgRef.current.querySelectorAll("path");
+    const svg = svgRef.current;
+    const paths = svg.querySelectorAll("path");
 
-    // Reveal the container now that GSAP is ready to handle hiding individual paths
-    gsap.set(svgRef.current, { opacity: 1 });
-
-    // Hide strokes and fills initially
+    // Container stays opacity:0 (from inline style) — paths are also hidden individually.
+    // We do NOT reveal the container immediately; it is revealed via a time-based delay below.
     paths.forEach((path) => {
       const length = path.getTotalLength();
       gsap.set(path, {
         strokeDasharray: length,
         strokeDashoffset: length,
         opacity: 0,
-        fillOpacity: 0, // Keep fill transparent initially so strokes can draw
+        fillOpacity: 0,
       });
     });
 
-    const scrollOptions = {
+    // Reveal the container ONLY after the hero intro text animation completes (~3.5s).
+    // This prevents the signature from flashing on fresh load AND on mid-scroll refresh.
+    const revealTimer = setTimeout(() => {
+      if (!svg) return;
+      gsap.to(svg, { opacity: 1, duration: 0.6, ease: "power2.inOut" });
+    }, 3500);
+
+    // Scroll-based path drawing — starts after 50px scroll so it never fires at scroll=0.
+    // The container opacity gate above ensures nothing is visible until after the intro.
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#hero-section",
-        start: "top top",
+        start: "top+=50 top",
         end: isMobile ? "+=200%" : "+=300%",
         scrub: 1,
+        id: "signature-draw",
       },
-    };
+    });
 
-    const tl = gsap.timeline(scrollOptions);
-
-    // 1. Fade opacity in for every vector
+    // 1. Fade paths in
     tl.to(paths, {
       opacity: 1,
       duration: isMobile ? 0.3 : 0.1,
       ease: "none",
     });
 
-    // 2. Transform every single vector!
+    // 2. Draw every stroke
     tl.to(paths, {
       strokeDashoffset: 0,
       duration: isMobile ? 1.5 : 2.3,
       ease: isMobile ? "power2.out" : "none",
-      stagger: 0.03, // Slightly faster for intro
+      stagger: 0.03,
     }, "<");
 
-    // 3. Fade in the solid fill as it finishes
+    // 3. Fade in solid fill as strokes finish
     tl.to(paths, {
       fillOpacity: 1,
       duration: isMobile ? 0.8 : 1.0,
       ease: "none",
     }, isMobile ? "-=0.5" : "-=1.0");
 
+    return () => {
+      clearTimeout(revealTimer);
+      // Only kill THIS component's trigger — do NOT kill all triggers globally
+      ScrollTrigger.getById("signature-draw")?.kill();
+      tl.kill();
+    };
   }, [isMobile]);
 
   return (
