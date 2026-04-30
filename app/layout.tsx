@@ -49,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${archivoFont.variable} ${interFont.variable} ${bebasFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
+        className={`${archivoFont.variable} ${interFont.variable} ${bebasFont.variable} antialiased bg-[#EAE8E3] dark:bg-[#0A0A0A] text-[#111111] dark:text-[#EAE8E3] font-sans`}
       >
         <SmoothScroll>{children}</SmoothScroll>
       </body>
