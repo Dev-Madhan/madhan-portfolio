@@ -2,6 +2,36 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* ── Lenis Smooth Scroll ──────────────────────────────────────────────────── */
+/* Required for Lenis to intercept scroll and apply its own momentum */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Momentum on iOS & Android - feels cinematic on touch */
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Ensure GSAP pinned elements stay crisp during Lenis scroll */
+[data-gsap-pin] {
+  will-change: transform;
+}
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 @custom-variant dark (&:is(.dark *));
 
 /* Define custom screen sizes as CSS variables */

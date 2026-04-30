@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/src/components/SmoothScroll";
 
 const archivoFont = Archivo({
   display: 'swap',
@@ -50,7 +51,7 @@ export default function RootLayout({
       <body
         className={`${archivoFont.variable} ${interFont.variable} ${bebasFont.variable} antialiased bg-stone-200 text-stone-900 font-sans`}
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
